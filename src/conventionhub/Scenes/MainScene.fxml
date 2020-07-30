@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane maxHeight="Infinity" maxWidth="Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conventionhub.Scenes.MainSceneController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="800.0" prefWidth="800.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="600.0" prefHeight="600.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0">
+         <center>
+            <TabPane fx:id="ContentsTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+               <tabs>
+                  <Tab text="Giới thiệu chương trình">
+                      <content>
+                          
+                      </content>
+                     <content>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                           <center>
+                              <ImageView fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                                 <image>
+                                    <Image url="@../../images/default-convention.png" />
+                                 </image>
+                              </ImageView>
+                           </center>
+                           <top>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label text="Giới thiệu chương trình" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </top>
+                           <left>
+                              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label fx:id="ApplicationDescription" textAlignment="JUSTIFY" wrapText="true">
+                                        <font>
+                                          <Font name="System Regular" size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </padding>
+                              </VBox>
+                           </left>
+                           <bottom>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Label text="Hãy sử dụng ứng dụng để phục vụ nhu cầu tổ chức hội nghị của bạn ~" textAlignment="CENTER">
+                                       <font>
+                                          <Font name="System Italic" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </bottom>
+                        </BorderPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Danh sách hội nghị">
+                     <content>
+                        <BorderPane fx:id="Conventions_BorderPane" prefHeight="200.0" prefWidth="200.0">
+                           <top>
+                              <BorderPane prefHeight="70.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+                                 <left>
+                                    <HBox alignment="CENTER" prefHeight="70.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <RadioButton fx:id="ListDisplay_Button" mnemonicParsing="false" text="Dạng list">
+                                             <HBox.margin>
+                                                <Insets right="20.0" />
+                                             </HBox.margin>
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="display_type" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton fx:id="CardsDisplay_Button" mnemonicParsing="false" text="Cards" toggleGroup="$display_type" visible="false" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </HBox>
+                                 </left>
+                                 <center>
+                                    <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Button fx:id="RefreshButton" mnemonicParsing="false" onMouseClicked="#RefreshButton_OnClicked" text="Refresh thông tin" />
+                                       </children>
+                                       <BorderPane.margin>
+                                          <Insets />
+                                       </BorderPane.margin>
+                                       <padding>
+                                          <Insets right="10.0" />
+                                       </padding>
+                                    </HBox>
+                                 </center>
+                              </BorderPane>
+                           </top>
+                           <center>
+                                <StackPane prefHeight="150.0" prefWidth="200.0">
+                                   <children>
+                                      <ScrollPane>
+                                         <content>
+                                           <StackPane fx:id="ConventionDisplayPane" />
+                                         </content>
+                                      </ScrollPane>
+                                      <VBox fx:id="loadingOverlay" alignment="CENTER" disable="true" prefHeight="200.0" prefWidth="100.0">
+                                         <children>
+                                            <ProgressIndicator />
+                                         </children>
+                                      </VBox>
+                                   </children>
+                                </StackPane>
+                           </center>
+                           <bottom>
+                               <Pagination fx:id="ConventionDisplay_Pagination" maxPageIndicatorCount="10" pageCount="1" prefHeight="70.0" prefWidth="200.0" />
+                           </bottom>
+                        </BorderPane>
+                     </content></Tab>
+               </tabs>
+            </TabPane>
+         </center>
+         <top>
+            <BorderPane prefHeight="100.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <right>
+                  <HBox fx:id="AccountPane" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label fx:id="TrangThaiDangNhap" text="TrangThaiDangNhap">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Button fx:id="LogIn_Out_Button" mnemonicParsing="false" onMouseClicked="#LogInOutButton_OnClicked" text="Log In">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="SignUp_Profile_Button" mnemonicParsing="false" onMouseClicked="#SignUp_ProfileButton_OnClicked" text="Sign Up" />
+                     </children>
+                  </HBox>
+               </right>
+               <left>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="250.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label text="ConventionHub">
+                           <font>
+                              <Font name="System Bold" size="30.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="25.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+               </left>
+            </BorderPane>
+         </top>
+      </BorderPane>
+   </children>
+</GridPane>

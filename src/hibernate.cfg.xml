@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/quanlyhoinghi?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">123456</property>
+    <property name="hibernate.connection.isolation">2</property>
+    
+    <mapping resource="conventionhub/pojos/Diadiem.hbm.xml"/>
+    <mapping resource="conventionhub/pojos/ChitietHoinghi.hbm.xml"/>
+    <mapping resource="conventionhub/pojos/Dangkyhoinghi.hbm.xml"/>
+    <mapping resource="conventionhub/pojos/User.hbm.xml"/>
+    <mapping resource="conventionhub/pojos/TinhtrangxoaHoinghi.hbm.xml"/>
+    <mapping resource="conventionhub/pojos/TinhtrangxoaDiadiem.hbm.xml"/>
+    <mapping resource="conventionhub/pojos/Hoinghi.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

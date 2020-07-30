@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conventionhub.Scenes.ThemHoiNghiSceneController">
+   <children>
+      <BorderPane fx:id="ThemHoiNghi_BorderPane" disable="true" maxHeight="550.0" maxWidth="750.0" prefHeight="550.0" prefWidth="750.0">
+         <right>
+            <BorderPane prefHeight="200.0" prefWidth="350.0" BorderPane.alignment="CENTER">
+               <bottom>
+                  <BorderPane maxHeight="180.0" prefHeight="180.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <center>
+                        <GridPane BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="10.0" prefWidth="181.0" />
+                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="173.0" minWidth="10.0" prefWidth="169.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Tên địa điểm">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Địa chỉ" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Sức chứa" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <TextField fx:id="TenDiaDiemField" GridPane.columnIndex="1" />
+                              <TextField fx:id="DiaDiemAddress_Field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="DiaDiemCapacity_Field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Button fx:id="ThemDiaDiemButton" mnemonicParsing="false" onMouseClicked="#ThemDiaDiemButton_OnClicked" text="Thêm địa điểm" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Button fx:id="SuaDiadiemDangchonButton" disable="true" mnemonicParsing="false" onMouseClicked="#SuaDiaDiemDangChonButton_OnClicked" text="Sửa địa điểm đang chọn" GridPane.rowIndex="3" />
+                           </children>
+                        </GridPane>
+                     </center>
+                     <top>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="DeselectSelectionDiadiemButton" disable="true" mnemonicParsing="false" onMouseClicked="#BoChonDiaDiemButton_OnClicked" text="Bỏ chọn" />
+                              <Button fx:id="RefreshDSDiaDiemButton" mnemonicParsing="false" onMouseClicked="#RefreshDSDiaDiem_OnClicked" text="Refresh DS địa điểm" />
+                           </children>
+                           <BorderPane.margin>
+                              <Insets />
+                           </BorderPane.margin>
+                        </HBox>
+                     </top>
+                  </BorderPane>
+               </bottom>
+               <top>
+                  <BorderPane prefHeight="25.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <center>
+                        <GridPane BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Mã địa điểm đã chọn">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="ChosenDiadiem_Label" text="Chưa chọn địa điểm" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                     </center>
+                  </BorderPane>
+               </top>
+               <center>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <center>
+                        <ScrollPane fx:id="Diadiem_ScrollPane" BorderPane.alignment="CENTER">
+                          <content>
+                            <AnchorPane prefWidth="900.0">
+                                 <children>
+                                    <TableView fx:id="DiaDiem_TableView" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columns>
+                                        <TableColumn fx:id="clmMaDiadiem" editable="false" prefWidth="75.0" resizable="false" text="Mã địa điểm" />
+                                        <TableColumn fx:id="clmTenDiadiem" editable="false" prefWidth="170.0" resizable="false" text="Tên địa điểm" />
+                                        <TableColumn fx:id="clmDiaChi" editable="false" prefWidth="260.0" resizable="false" text="Địa chỉ" />
+                                        <TableColumn fx:id="clmSucChua" editable="false" prefWidth="75.0" resizable="false" text="Sức chứa" />
+                                        <TableColumn fx:id="clmTTXoa" editable="false" prefWidth="70.0" resizable="false" text="Đã bị xóa?" />
+                                        <TableColumn fx:id="clmDelete" editable="false" prefWidth="150.0" resizable="false" text="Xóa" />
+                                        <TableColumn fx:id="clmActions" editable="false" prefWidth="100.0" resizable="false" text="Lựa chọn" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </ScrollPane>
+                     </center>
+                     <bottom>
+                         <Pagination fx:id="DiadiemDisplay_Pagination" maxHeight="50.0" maxPageIndicatorCount="10" pageCount="1" prefHeight="50.0" BorderPane.alignment="CENTER" />
+                     </bottom>
+                  </BorderPane>
+               </center>
+            </BorderPane>
+         </right>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="Add_Edit_HoinghiButton" mnemonicParsing="false" onMouseClicked="#AddHoinghiButton_OnClicked" text="Thêm mới hội nghị này" />
+               </children>
+            </HBox>
+         </bottom>
+         <top>
+            <BorderPane maxHeight="75.0" prefHeight="75.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <left>
+                  <HBox alignment="CENTER_LEFT" maxHeight="75.0" prefHeight="75.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button fx:id="GoBackButton" mnemonicParsing="false" onMouseClicked="#GoBack_OnClicked" text="Quay lại" />
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </HBox>
+               </left>
+               <center>
+                  <Label fx:id="pageTitle" text="Thêm hội nghị mới" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Label>
+               </center>
+            </BorderPane>
+         </top>
+         <center>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <center>
+                  <GridPane BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="134.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="266.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="83.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="102.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="113.0" minHeight="10.0" prefHeight="106.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Tên hội nghị (*)" textAlignment="CENTER" wrapText="true">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Mô tả ngắn gọn (*)" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Thời điểm bắt đầu (*)" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Thời điểm kết thúc (*)" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Mô tả chi tiết" GridPane.rowIndex="4" />
+                        <TextArea fx:id="MoTaChiTiet_Field" maxHeight="100.0" maxWidth="250.0" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextField fx:id="TenHoiNghi_Field" maxWidth="250.0" prefWidth="250.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="MoTaNganGon_Field" maxWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <HBox alignment="CENTER_LEFT" maxWidth="250.0" prefHeight="31.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <children>
+                              <DatePicker fx:id="TDBD_DatePicker" maxWidth="250.0" prefWidth="250.0" promptText="Ngày" />
+                              <TextField fx:id="TDBD_GioField" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" promptText="Giờ" />
+                              <Label text=":" />
+                              <TextField fx:id="TDBD_PhutField" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" promptText="Phút" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" maxWidth="250.0" prefHeight="31.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <children>
+                              <DatePicker fx:id="TDKT_DatePicker" maxWidth="250.0" prefWidth="250.0" promptText="Ngày" />
+                              <TextField fx:id="TDKT_GioField" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" promptText="Giờ" />
+                              <Label text=":" />
+                              <TextField fx:id="TDKT_PhutField" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" promptText="Phút" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </GridPane>
+               </center>
+               <bottom>
+                  <BorderPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <center>
+                        <GridPane BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <TextField fx:id="imageLink_Field" editable="false" maxWidth="190.0" prefHeight="31.0" prefWidth="168.0" promptText="Ảnh mặc định" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                                 <children>
+                                    <Button mnemonicParsing="false" onMouseClicked="#BrowseImage_OnClicked" text="Browse" />
+                                    <Button mnemonicParsing="false" onMouseClicked="#ResetDefaultImage_OnClicked" text="Đặt lại" />
+                                 </children>
+                              </HBox>
+                              <Label text="Chọn hình ảnh cho hội nghị" GridPane.columnSpan="2" />
+                           </children>
+                           <BorderPane.margin>
+                              <Insets left="20.0" />
+                           </BorderPane.margin>
+                        </GridPane>
+                     </center>
+                     <left>
+                        <VBox fx:id="outsideImageView_VBox" alignment="CENTER" maxHeight="150.0" maxWidth="150.0" minHeight="150.0" minWidth="150.0" prefHeight="150.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <ImageView fx:id="ConventionImage_Display" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@../../images/default-convention.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </VBox>
+                     </left>
+                  </BorderPane>
+               </bottom>
+            </BorderPane>
+         </center>
+      </BorderPane>
+      <VBox fx:id="loadingOverlay" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" visible="true">
+        <children>
+           <ProgressIndicator />
+        </children>
+     </VBox>
+   </children>
+</StackPane>

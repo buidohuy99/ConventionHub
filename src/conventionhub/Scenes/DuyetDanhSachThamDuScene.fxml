@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conventionhub.Scenes.DuyetDanhSachThamDuSceneController">
+   <children>
+       <BorderPane fx:id="Attendance_BorderPane">
+           <center>
+               <ScrollPane>
+                  <content>
+                    <AnchorPane id="AnchorPane" prefWidth="750.0">
+                        <children>
+                           <TableView fx:id="AttendanceTable" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <columns>
+                                 <TableColumn fx:id="clmUsername" editable="false" prefWidth="150.0" resizable="false" text="Username" />
+                                 <TableColumn fx:id="clmTenUser" editable="false" prefWidth="150.0" resizable="false" text="Tên hiển thị" />
+                                 <TableColumn fx:id="clmEmailUser" editable="false" prefWidth="200.0" resizable="false" text="Email User" />
+                                 <TableColumn fx:id="clmConfirmed" editable="false" prefWidth="100.0" resizable="false" text="Đã duyệt?" />
+                                 <TableColumn fx:id="clmActions" editable="false" prefWidth="150.0" resizable="false" text="Hành động" />   
+                              </columns>
+                           </TableView>
+                        </children>
+                    </AnchorPane>
+                  </content>
+               </ScrollPane>
+           </center>
+           <bottom>
+               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="0.0" BorderPane.alignment="CENTER">
+                   <children>
+                       <Button fx:id="RefreshButton" mnemonicParsing="false" onMouseClicked="#RefreshButton_Clicked" text="Refresh thông tin" />
+                   </children>
+               </HBox>
+           </bottom>
+         <top>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Duyệt đăng ký">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </top>
+       </BorderPane>
+       <VBox fx:id="loadingOverlay" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+           <children>
+              <ProgressIndicator />
+           </children>
+       </VBox>
+   </children>
+</StackPane>

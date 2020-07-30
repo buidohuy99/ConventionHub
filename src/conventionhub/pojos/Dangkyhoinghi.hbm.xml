@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 30, 2020, 1:16:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="conventionhub.pojos.Dangkyhoinghi" table="dangkyhoinghi" catalog="quanlyhoinghi" optimistic-lock="version">
+        <composite-id name="id" class="conventionhub.pojos.DangkyhoinghiId">
+            <key-property name="user" type="int">
+                <column name="user" />
+            </key-property>
+            <key-property name="hoinghidangky" type="int">
+                <column name="hoinghidangky" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="hoinghi" class="conventionhub.pojos.Hoinghi" update="false" insert="false" fetch="select">
+            <column name="hoinghidangky" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="conventionhub.pojos.User" update="false" insert="false" fetch="select">
+            <column name="user" not-null="true" />
+        </many-to-one>
+        <property name="daDuocDuyet" type="boolean">
+            <column name="DaDuocDuyet" not-null="true" />
+        </property>
+        <property name="createdDate" type="timestamp">
+            <column name="createdDate" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

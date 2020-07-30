@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conventionhub.Scenes.DangNhapSceneController">
+   <children>
+      <GridPane fx:id="DangNhap_Pane" maxHeight="200.0" maxWidth="200.0" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="50.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="50.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints />
+            <RowConstraints />
+        </rowConstraints>
+         <children>
+           <Label text="Đăng nhập" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.rowIndex="0" />
+           
+           <Label text="Username" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1" />
+           <Label text="Mật khẩu" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2" />
+           <Button fx:id="LogIn_Button" mnemonicParsing="false" onAction="#LogIn_OnClicked" text="Đăng nhập" GridPane.rowIndex="3" />
+           
+           <TextField fx:id="Username" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+           <PasswordField fx:id="MatKhau" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+           <Button fx:id="Register_Button" mnemonicParsing="false" onAction="#Register_OnClicked" text="Đi đến đăng ký" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+      <VBox fx:id="loadingOverlay" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
+           <children>
+              <ProgressIndicator />
+           </children>
+       </VBox>
+   </children>
+</StackPane>

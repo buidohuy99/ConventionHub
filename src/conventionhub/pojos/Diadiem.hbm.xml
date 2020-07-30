@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 30, 2020, 1:16:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="conventionhub.pojos.Diadiem" table="diadiem" catalog="quanlyhoinghi" optimistic-lock="version">
+        <id name="maDiaDiem" type="java.lang.Integer">
+            <column name="MaDiaDiem" />
+            <generator class="identity" />
+        </id>
+        <property name="tenDiaDiem" type="string">
+            <column name="TenDiaDiem" length="45" not-null="true" />
+        </property>
+        <property name="diaChi" type="string">
+            <column name="DiaChi" length="70" not-null="true" />
+        </property>
+        <property name="sucChua" type="int">
+            <column name="SucChua" not-null="true" />
+        </property>
+        <property name="createdDate" type="timestamp">
+            <column name="createdDate" length="19" not-null="true" />
+        </property>
+        <property name="latestModified" type="timestamp">
+            <column name="latestModified" length="19" not-null="true" />
+        </property>
+        <set name="hoinghis" table="hoinghi" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="DiaDiemToChuc" not-null="true" />
+            </key>
+            <one-to-many class="conventionhub.pojos.Hoinghi" />
+        </set>
+        <one-to-one name="tinhtrangxoaDiadiem" class="conventionhub.pojos.TinhtrangxoaDiadiem"></one-to-one>
+    </class>
+</hibernate-mapping>

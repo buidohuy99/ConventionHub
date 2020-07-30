@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conventionhub.views.ConventionList_ViewController">
+   <children>
+      <TableView fx:id="ConventionTable" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columns>
+            <TableColumn fx:id="clmMaHoiNghi" editable="false" prefWidth="75.0" resizable="false" text="Mã hội nghị" />
+            <TableColumn fx:id="clmTenHoiNghi" editable="false" prefWidth="168.0" resizable="false" text="Tên hội nghị" />
+            <TableColumn fx:id="clmDescription" editable="false" prefWidth="260.0" resizable="false" text="Mô tả ngắn gọn" />
+            <TableColumn fx:id="clmStartTime" editable="false" prefWidth="149.0" resizable="false" text="Thời điểm bắt đầu" />
+            <TableColumn fx:id="clmEndTime" editable="false" prefWidth="175.0" resizable="false" text="Thời điểm kết thúc" />
+            <TableColumn fx:id="clmDetails" editable="false" prefWidth="172.0" resizable="false" text="Xem chi tiết" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 30, 2020, 1:16:08 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="conventionhub.pojos.Hoinghi" table="hoinghi" catalog="quanlyhoinghi" optimistic-lock="version">
+        <id name="maHn" type="java.lang.Integer">
+            <column name="MaHN" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="diadiem" class="conventionhub.pojos.Diadiem" fetch="select">
+            <column name="DiaDiemToChuc" not-null="true" />
+        </many-to-one>
+        <property name="tenHn" type="string">
+            <column name="TenHN" length="70" not-null="true" />
+        </property>
+        <property name="motaNgangon" type="string">
+            <column name="Mota_Ngangon" length="200" not-null="true" />
+        </property>
+        <property name="hinhAnh" type="string">
+            <column name="HinhAnh" length="260" />
+        </property>
+        <property name="thoiDiemBatDau" type="timestamp">
+            <column name="ThoiDiemBatDau" length="19" not-null="true" />
+        </property>
+        <property name="thoiDiemKetThuc" type="timestamp">
+            <column name="ThoiDiemKetThuc" length="19" not-null="true" />
+        </property>
+        <property name="createdDate" type="timestamp">
+            <column name="createdDate" length="19" not-null="true" />
+        </property>
+        <property name="lastestModified" type="timestamp">
+            <column name="lastestModified" length="19" not-null="true" />
+        </property>
+        <one-to-one name="chitietHoinghi" class="conventionhub.pojos.ChitietHoinghi"></one-to-one>
+        <set name="dangkyhoinghis" table="dangkyhoinghi" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="hoinghidangky" not-null="true" />
+            </key>
+            <one-to-many class="conventionhub.pojos.Dangkyhoinghi" />
+        </set>
+        <one-to-one name="tinhtrangxoaHoinghi" class="conventionhub.pojos.TinhtrangxoaHoinghi"></one-to-one>
+    </class>
+</hibernate-mapping>

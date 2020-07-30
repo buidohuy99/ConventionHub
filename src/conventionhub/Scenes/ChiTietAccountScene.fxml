@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conventionhub.Scenes.ChiTietAccountSceneController">
+   <children>
+      <GridPane fx:id="Profile_Pane" maxHeight="300.0" maxWidth="300.0" prefHeight="300.0" prefWidth="300.0" StackPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="50.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="50.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+           <Label text="Profile" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.rowIndex="0" />
+           
+           <Label text="Username" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1" />
+           <Label text="Mật khẩu hiện tại" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2" />
+           <Label text="Mật khẩu mới" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3" />
+           <Label text="Nhập lại mật khẩu mới" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="4" />
+           <Label text="Tên hiển thị" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="5" />
+           <Label text="Email" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="6" />
+           <Button fx:id="SaveEdit_Button" mnemonicParsing="false" onAction="#SaveEdit_OnClicked" text="Lưu chỉnh sửa" GridPane.rowIndex="7" />
+           
+           <Label fx:id="Username" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+           <PasswordField fx:id="MatKhauCu" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+           <PasswordField fx:id="MatKhau" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+           <PasswordField fx:id="NhapLaiMatKhau" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+           <TextField fx:id="HoTen" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+           <TextField fx:id="Email" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+           <Button fx:id="Quit_Button" mnemonicParsing="false" onAction="#QuitButton_OnClicked" text="Đóng" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+         </children>
+      </GridPane>
+      <VBox fx:id="loadingOverlay" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
+           <children>
+              <ProgressIndicator />
+           </children>
+       </VBox>
+   </children>
+</StackPane>

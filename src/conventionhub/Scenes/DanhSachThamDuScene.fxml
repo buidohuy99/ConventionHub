@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="conventionhub.Scenes.DanhSachThamDuSceneController">
+    <AnchorPane id="AnchorPane">
+       <children>
+            <TableView fx:id="DanhSachThamDu" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <columns>
+                   <TableColumn fx:id="clmUsername" editable="false" resizable="false" prefWidth="150.0" text="Username" />
+                   <TableColumn fx:id="clmTenUser" editable="false" prefWidth="150.0" resizable="false" text="Tên hiển thị" />
+                   <TableColumn fx:id="clmEmailUser" editable="false" prefWidth="200.0" resizable="false" text="Email User" />
+                </columns>
+            </TableView>
+       </children>
+    </AnchorPane>
+</ScrollPane>

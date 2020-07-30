@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane maxHeight="Infinity" maxWidth="Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conventionhub.Scenes.ChiTietSceneController">
+   <children>
+      <BorderPane fx:id="ChiTietScene" maxHeight="500.0" maxWidth="700.0" prefHeight="500.0" prefWidth="700.0" StackPane.alignment="CENTER" disable="true">
+         <left>
+            <ImageView fx:id="Convention_Image" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </BorderPane.margin></ImageView>
+         </left>
+         <center>
+            <ScrollPane fitToWidth="true" style="-fx-background-color:transparent;">
+               <content>
+               <GridPane fx:id="Information_Pane" hgap="10" vgap="50" BorderPane.alignment="CENTER">
+                  <columnConstraints>
+                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="20" />
+                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="80" />
+                  </columnConstraints>
+                  <rowConstraints>
+                       <RowConstraints maxHeight="Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+                       <RowConstraints maxHeight="Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+                       <RowConstraints maxHeight="Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+                       <RowConstraints maxHeight="Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+                       <RowConstraints maxHeight="Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+                       <RowConstraints maxHeight="Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+                       <RowConstraints maxHeight="Infinity" valignment="CENTER" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                  <children>
+                      <Label style="-fx-font-weight: bold;" text="Mã hội nghị" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="0" />
+                      <Label style="-fx-font-weight: bold;" text="Tên hội nghị" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1" />
+                      <Label style="-fx-font-weight: bold;" text="Thời gian bắt đầu" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2" />
+                      <Label style="-fx-font-weight: bold;" text="Thời gian kết thúc" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3" />
+                      <Label style="-fx-font-weight: bold;" text="Địa điểm" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="4" />
+                      <Label style="-fx-font-weight: bold;" text="Số vị trí đã full" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="5" />
+                      <Label style="-fx-font-weight: bold;" text="Mô tả chi tiết" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="6" />
+                      
+                      <Label fx:id="MaHoiNghi" alignment="CENTER" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                      <Label fx:id="TenHoiNghi" alignment="CENTER" text="mota_ngango" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                      <Label fx:id="TGBatDau" alignment="CENTER" text="diadiem" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                      <Label fx:id="TGKetThuc" alignment="CENTER" text="a/b" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                      <Label fx:id="DiaDiem" alignment="CENTER" text="a/b" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                      <Label fx:id="SoLuongThamDu" alignment="CENTER" text="a/b" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                      <Label fx:id="MoTaChiTiet" alignment="CENTER" text="a/b" textAlignment="JUSTIFY" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  </children>
+               </GridPane>
+               </content>
+            </ScrollPane>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="Register_Convention" mnemonicParsing="false" onMouseClicked="#RegisterConvention_OnClicked" text="Đăng ký tham dự">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="See_RegisterList" mnemonicParsing="false" onAction="#SeeRegisterList_OnClick" text="Xem danh sách (đã duyệt) tham dự">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin></Button>
+                  <Button fx:id="RefreshButton" mnemonicParsing="false" onAction="#RefreshButton_OnClick" text="Refresh thông tin" />
+               </children>
+            </HBox>
+         </bottom>
+         <top>
+            <BorderPane prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <left>
+                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                      <children>
+                          <Button fx:id="GoBackButton" mnemonicParsing="false" onMouseClicked="#GoBack_OnClicked" text="Quay lại">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Button>
+                      </children>
+                  </HBox>
+               </left>
+               <center>
+                  <Label text="Chi tiết hội nghị" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Label>
+               </center>
+            </BorderPane>
+         </top>
+      </BorderPane>
+      <VBox fx:id="loadingOverlay" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" visible="true">
+        <children>
+           <ProgressIndicator />
+        </children>
+     </VBox>
+   </children>
+</StackPane>
