@@ -15,6 +15,7 @@ import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
 import org.hibernate.engine.spi.SessionFactoryImplementor;
 import org.hibernate.service.spi.Stoppable;
 import utils.HibernateUtils;
+import utils.ThreadPool;
 
 public class Main extends Application {
     
@@ -53,5 +54,6 @@ public class Main extends Application {
     public void stop() throws Exception {
         super.stop();
         HibernateUtils.getSessionFactory().close();
+        ThreadPool.shutdown();
     }
 }

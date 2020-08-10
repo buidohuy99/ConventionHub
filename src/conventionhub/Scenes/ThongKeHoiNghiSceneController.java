@@ -88,8 +88,7 @@ public class ThongKeHoiNghiSceneController implements Initializable {
         SearchCriteriasList = FXCollections.observableArrayList("Theo mã hội nghị","Theo tên hội nghị");
         
         SearchKeywordType_ComboBox.setItems(SearchCriteriasList);
-        SearchKeywordType_ComboBox.getSelectionModel().select(0);
-        
+        SearchKeywordType_ComboBox.getSelectionModel().select(0); 
         
         ConventionTable.addEventFilter(ScrollEvent.ANY, Event::consume);
         

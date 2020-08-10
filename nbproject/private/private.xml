@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/Projects/java/ConventionHub/src/conventionhub/Scenes/ThongKeHoiNghiSceneController.java</file>
             <file>file:/D:/Projects/java/ConventionHub/src/conventionhub/Scenes/MainSceneController.java</file>
-            <file>file:/D:/Projects/java/ConventionHub/src/conventionhub/Scenes/MainScene.fxml</file>
+            <file>file:/D:/Projects/java/ConventionHub/src/conventionhub/Main.java</file>
+            <file>file:/D:/Projects/java/ConventionHub/src/conventionhub/Scenes/ThongKeHoiNghiScene.fxml</file>
         </group>
     </open-files>
 </project-private>
