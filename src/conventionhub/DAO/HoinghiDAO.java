@@ -87,17 +87,7 @@ public class HoinghiDAO {
     }
     
     public static void saveOrUpdateHoinghi(Session session, Hoinghi hn){
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            session.saveOrUpdate(hn);
-            tx.commit(); // Flush happens automatically
-        }
-        catch (RuntimeException e) {
-            tx.rollback();
-            e.printStackTrace(System.err);
-            return;
-        }
+        session.saveOrUpdate(hn);
         if(hn.getChitietHoinghi() != null){
             ChiTietHoinghiDAO.saveOrUpdateChitiet(session, hn.getChitietHoinghi());
         }

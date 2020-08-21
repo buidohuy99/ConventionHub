@@ -92,41 +92,14 @@ public class DangkyhoinghiDAO {
     }
     
     public static void addDangKy(Session session, Dangkyhoinghi dk){
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            session.save(dk);
-            tx.commit(); // Flush happens automatically
-        }
-        catch (RuntimeException e) {
-            tx.rollback();
-            e.printStackTrace(System.err); // or display error message
-        }
+        session.save(dk);
     }
     
     public static void updateDangKy(Session session, Dangkyhoinghi dk){
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            session.update(dk);
-            tx.commit(); // Flush happens automatically
-        }
-        catch (RuntimeException e) {
-            tx.rollback();
-            e.printStackTrace(System.err); // or display error message
-        }
+        session.update(dk);
     }
     
     public static void removeDangKy(Session session, Dangkyhoinghi dk){
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            session.delete(dk);
-            tx.commit(); // Flush happens automatically
-        }
-        catch (RuntimeException e) {
-            tx.rollback();
-            e.printStackTrace(System.err); // or display error message
-        }
+        session.delete(dk);
     }
 }

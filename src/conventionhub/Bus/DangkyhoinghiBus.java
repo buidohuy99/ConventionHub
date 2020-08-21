@@ -26,7 +26,9 @@ public class DangkyhoinghiBus {
         SessionFactory factory = HibernateUtils.getSessionFactory();
         Session session = factory.openSession();
         
+        session.beginTransaction();
         List<User> results = DangkyhoinghiDAO.fetchAll_User_DangkyHN(session, mahn);
+        session.getTransaction().commit();
         
         session.close();
         return results;
@@ -38,7 +40,9 @@ public class DangkyhoinghiBus {
         SessionFactory factory = HibernateUtils.getSessionFactory();
         Session session = factory.openSession();
         
+        session.beginTransaction();
         List<User> results = DangkyhoinghiDAO.fetchAll_ChuaDuyetUser_DangkyHN(session, mahn);
+        session.getTransaction().commit();
         
         session.close();
         return results;
@@ -50,7 +54,9 @@ public class DangkyhoinghiBus {
         SessionFactory factory = HibernateUtils.getSessionFactory();
         Session session = factory.openSession();
         
+        session.beginTransaction();
         List<Hoinghi> results = DangkyhoinghiDAO.fetchAll_Hoinghi_OfUser(session, iduser);
+        session.getTransaction().commit();
         
         session.close();
         return results;
@@ -60,9 +66,11 @@ public class DangkyhoinghiBus {
         if(iduser == null || maHN == null) return null;
         SessionFactory factory = HibernateUtils.getSessionFactory();
         Session session = factory.openSession();
+        session.beginTransaction();
         Boolean result = DangkyhoinghiDAO.checkUser_ParticipateHoinghi(session, iduser, maHN);
-        session.close();
+        session.getTransaction().commit();
         
+        session.close();
         return result;
     }
     
@@ -70,9 +78,10 @@ public class DangkyhoinghiBus {
         if(iduser == null || maHN == null) return null;
         SessionFactory factory = HibernateUtils.getSessionFactory();
         Session session = factory.openSession();
+        session.getTransaction().begin();
         Dangkyhoinghi result = DangkyhoinghiDAO.getDangkyhoinghi_ofUser_forHoinghi(session, iduser, maHN);
+        session.getTransaction().commit();
         session.close();
-        
         return result;
     }
     
@@ -90,30 +99,38 @@ public class DangkyhoinghiBus {
     public static void addDangky(User user, Hoinghi hn) throws DangkyhoinghiBusException{
         SessionFactory factory = HibernateUtils.getSessionFactory();
         Session session = factory.openSession();
+        session.beginTransaction();
         session.refresh(hn);
         
         Date now = new Date();
-        if(now.after(hn.getThoiDiemBatDau())||now.equals(hn.getThoiDiemBatDau())){
+        try{
+            if(now.after(hn.getThoiDiemBatDau())||now.equals(hn.getThoiDiemBatDau())){
+                throw new DangkyhoinghiBusException("Lỗi đăng ký tham dự", "Hội nghị đã kết thúc");
+            }
+            if(hn.getTinhtrangxoaHoinghi() != null && hn.getTinhtrangxoaHoinghi().isTinhtrangxoa()){
+                throw new DangkyhoinghiBusException("Lỗi đăng ký tham dự", "Không thể đăng ký hội nghị đã bị xóa");
+            }
+            if(hn.getDiadiem() == null || (hn.getDiadiem().getTinhtrangxoaDiadiem() != null && hn.getDiadiem().getTinhtrangxoaDiadiem().isTinhtrangxoa())){
+                throw new DangkyhoinghiBusException("Lỗi đăng ký tham dự", "Địa điểm tổ chức không còn tồn tại! Xin liên hệ phía tổ chức");
+            }
+            if(hn.getDiadiem().getSucChua() < hn.getDangkyhoinghis().size() + 1){
+                throw new DangkyhoinghiBusException("Lỗi đăng ký tham dự", "Hội nghị tạm thời không đủ sức chứa. Vui lòng trở lại sau");
+            }
+
+            Dangkyhoinghi newOne = new Dangkyhoinghi(new DangkyhoinghiId(user.getIduser(), hn.getMaHn()), hn, user, false, new Date());
+
+            DangkyhoinghiDAO.addDangKy(session, newOne);
+        } catch (DangkyhoinghiBusException ex){
+            session.getTransaction().rollback();
             session.close();
-            throw new DangkyhoinghiBusException("Lỗi đăng ký tham dự", "Hội nghị đã kết thúc");
-        }
-        if(hn.getTinhtrangxoaHoinghi() != null && hn.getTinhtrangxoaHoinghi().isTinhtrangxoa()){
+            throw ex;
+        } catch (Exception ex){
+            ex.printStackTrace(System.err);
+            session.getTransaction().rollback();
             session.close();
-            throw new DangkyhoinghiBusException("Lỗi đăng ký tham dự", "Không thể đăng ký hội nghị đã bị xóa");
-        }
-        if(hn.getDiadiem() == null || (hn.getDiadiem().getTinhtrangxoaDiadiem() != null && hn.getDiadiem().getTinhtrangxoaDiadiem().isTinhtrangxoa())){
-            session.close();
-            throw new DangkyhoinghiBusException("Lỗi đăng ký tham dự", "Địa điểm tổ chức không còn tồn tại! Xin liên hệ phía tổ chức");
-        }
-        if(hn.getDiadiem().getSucChua() < hn.getDangkyhoinghis().size() + 1){
-            session.close();
-            throw new DangkyhoinghiBusException("Lỗi đăng ký tham dự", "Hội nghị tạm thời không đủ sức chứa. Vui lòng trở lại sau");
-        }
-        
-        Dangkyhoinghi newOne = new Dangkyhoinghi(new DangkyhoinghiId(user.getIduser(), hn.getMaHn()), hn, user, false, new Date());
-        
-        DangkyhoinghiDAO.addDangKy(session, newOne);
-            
+            return;
+        } 
+        session.getTransaction().commit();
         session.close();
     }
     
@@ -121,17 +138,28 @@ public class DangkyhoinghiBus {
         if(hn == null) return;
         SessionFactory factory = HibernateUtils.getSessionFactory();
         Session session = factory.openSession();
-        session.refresh(hn);
-        if(hn.getThoiDiemBatDau().before(new Date())){
+        try{
+            session.getTransaction().begin();
+            session.refresh(hn);
+            if(hn.getThoiDiemBatDau().before(new Date())){
+                throw new DangkyhoinghiBusException("Lỗi bỏ tham dự", "Hội nghị này đã/đang diễn ra");
+            }
+            Dangkyhoinghi temp = new Dangkyhoinghi();
+            temp.setId(new DangkyhoinghiId(user.getIduser(), hn.getMaHn()));
+            temp.setCreatedDate(new Date());
+
+            DangkyhoinghiDAO.removeDangKy(session, temp);
+        } catch (DangkyhoinghiBusException ex){
+            session.getTransaction().rollback();
             session.close();
-            throw new DangkyhoinghiBusException("Lỗi bỏ tham dự", "Hội nghị này đã/đang diễn ra");
-        }
-        Dangkyhoinghi temp = new Dangkyhoinghi();
-        temp.setId(new DangkyhoinghiId(user.getIduser(), hn.getMaHn()));
-        temp.setCreatedDate(new Date());
-        
-        DangkyhoinghiDAO.removeDangKy(session, temp);
-            
+            throw ex;
+        } catch (Exception ex){
+            ex.printStackTrace(System.err);
+            session.getTransaction().rollback();
+            session.close();
+            return;
+        } 
+        session.getTransaction().commit();
         session.close();
     }
     
@@ -139,21 +167,30 @@ public class DangkyhoinghiBus {
         if(userid == null || maHn == null) return;
         SessionFactory factory = HibernateUtils.getSessionFactory();
         Session session = factory.openSession();
-        
-        Dangkyhoinghi result = DangkyhoinghiDAO.getDangkyhoinghi_ofUser_forHoinghi(session, userid, maHn);
-        
-        if(result == null){
+        try{
+            session.getTransaction().begin();
+            Dangkyhoinghi result = DangkyhoinghiDAO.getDangkyhoinghi_ofUser_forHoinghi(session, userid, maHn);
+
+            if(result == null){
+                throw new DangkyhoinghiBusException("Không thể duyệt đăng ký không tồn tại", "Đăng ký này không còn tồn tại. Vui lòng refresh");  
+            }
+            if(result.isDaDuocDuyet()){
+                throw new DangkyhoinghiBusException("Đăng ký này đã được duyệt", "Không thể duyệt đăng ký đã được duyệt. Vui lòng refresh");  
+            }
+            result.setDaDuocDuyet(true);
+
+            DangkyhoinghiDAO.updateDangKy(session, result);
+        } catch (DangkyhoinghiBusException ex){
+            session.getTransaction().rollback();
             session.close();
-            throw new DangkyhoinghiBusException("Không thể duyệt đăng ký không tồn tại", "Đăng ký này không còn tồn tại. Vui lòng refresh");  
-        }
-        if(result.isDaDuocDuyet()){
+            throw ex;
+        } catch (Exception ex){
+            ex.printStackTrace(System.err);
+            session.getTransaction().rollback();
             session.close();
-            throw new DangkyhoinghiBusException("Đăng ký này đã được duyệt", "Không thể duyệt đăng ký đã được duyệt. Vui lòng refresh");  
-        }
-        result.setDaDuocDuyet(true);
-        
-        DangkyhoinghiDAO.updateDangKy(session, result);
-        
+            return;
+        } 
+        session.getTransaction().commit();
         session.close();
     }
 }

@@ -12,7 +12,9 @@ public class TinhtrangxoaDiadiemBus {
     public static TinhtrangxoaDiadiem getTinhtrangxoa_forDiadiem(Integer madd){
         if(madd == null) return null;
         Session session = HibernateUtils.getSessionFactory().openSession();
+        session.getTransaction().begin();
         TinhtrangxoaDiadiem tt = TinhtrangxoaDiadiemDAO.getTinhtrangxoa_forDiadiem(session, madd);    
+        session.getTransaction().commit();
         session.close();
         return tt;
     }

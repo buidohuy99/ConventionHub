@@ -19,30 +19,10 @@ public class TinhTrangXoaHoinghiDAO {
     }
     
     public static void addTinhtrangxoa(Session session, TinhtrangxoaHoinghi tt){
-        if(session == null) return;
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            session.save(tt);
-            tx.commit(); // Flush happens automatically
-        }
-        catch (RuntimeException e) {
-            tx.rollback();
-            e.printStackTrace(System.err); // or display error message
-        }
+        session.save(tt);
     }
     
     public static void updateTinhtrangxoa(Session session, TinhtrangxoaHoinghi tt){
-        if(session == null) return;
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            session.update(tt);
-            tx.commit(); // Flush happens automatically
-        }
-        catch (RuntimeException e) {
-            tx.rollback();
-            e.printStackTrace(System.err); // or display error message
-        }
+        session.update(tt);
     }
 }

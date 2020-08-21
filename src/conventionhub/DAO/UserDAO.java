@@ -50,29 +50,11 @@ public class UserDAO {
     }
     
     public static void addUser(Session session, User user){
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            session.save(user);
-            tx.commit(); // Flush happens automatically
-        }
-        catch (RuntimeException e) {
-            tx.rollback();
-            e.printStackTrace(System.err); // or display error message
-        }
+        session.save(user);
     }
     
     public static void updateUser(Session session, User user){
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            session.update(user);
-            tx.commit(); // Flush happens automatically
-        }
-        catch (RuntimeException e) {
-            tx.rollback();
-            e.printStackTrace(System.err); // or display error message
-        }
+        session.update(user);
     }
     
 }

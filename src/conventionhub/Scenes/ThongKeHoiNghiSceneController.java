@@ -281,13 +281,17 @@ public class ThongKeHoiNghiSceneController implements Initializable {
                             }
                         };
                         removeDangky.setOnSucceeded((t2) -> {
+                           
                             usableHoinghi.remove(getIndex());
                             loadingOverlay.setVisible(false);
                             Conventions_BorderPane.setDisable(false);
                         });
                         removeDangky.setOnFailed((t2) -> {
                             Exception ex = (Exception) removeDangky.getException();
+                            ex.printStackTrace();
+                            System.out.println("aaaaaa");
                             if(ex instanceof DangkyhoinghiBus.DangkyhoinghiBusException){
+                                System.out.println("aaaaaa");
                                 DangkyhoinghiBus.DangkyhoinghiBusException exc = (DangkyhoinghiBus.DangkyhoinghiBusException) ex;
                                 Alert alert = new Alert(Alert.AlertType.ERROR);
                                 alert.setHeaderText(exc.getMessage());

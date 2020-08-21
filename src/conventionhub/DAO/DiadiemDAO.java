@@ -55,16 +55,7 @@ public class DiadiemDAO {
     }
     
     public static void saveOrUpdateDiadiem(Session session, Diadiem dd){
-        Transaction tx = null;
-        try {
-            tx = session.beginTransaction();
-            session.saveOrUpdate(dd);
-            tx.commit(); // Flush happens automatically
-        }
-        catch (RuntimeException e) {
-            tx.rollback();
-            e.printStackTrace(System.err); // or display error message
-        }
+        session.saveOrUpdate(dd);
     }
     
     public static Long maxNumberOfDangkyhoinghi_perHoinghi_withDiadiem(Session session, Integer maDiaDiem){
