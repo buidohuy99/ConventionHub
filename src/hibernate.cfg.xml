@@ -7,7 +7,7 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/quanlyhoinghi?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">1234</property>
-    <!--<property name="hibernate.connection.isolation">2</property>-->
+    <property name="hibernate.connection.isolation">2</property>
     
     <mapping resource="conventionhub/pojos/Diadiem.hbm.xml"/>
     <mapping resource="conventionhub/pojos/ChitietHoinghi.hbm.xml"/>

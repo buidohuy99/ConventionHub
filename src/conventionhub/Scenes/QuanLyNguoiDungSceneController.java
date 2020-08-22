@@ -145,7 +145,6 @@ public class QuanLyNguoiDungSceneController implements Initializable {
         
         clmTTBlock.setCellValueFactory((p) -> {
             User user = (User) p.getValue();
-            user.tinhtrangblockProperty().set(user.isTinhTrangBlock());
             return user.tinhtrangblockProperty();
         });
         clmTTBlock.setReorderable(false);

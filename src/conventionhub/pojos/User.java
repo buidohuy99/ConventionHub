@@ -27,8 +27,10 @@ public class User  implements java.io.Serializable {
 
      private BooleanProperty tinhtrangblockBooleanProperty;
      public BooleanProperty tinhtrangblockProperty(){
-         if(tinhtrangblockBooleanProperty == null) tinhtrangblockBooleanProperty = new SimpleBooleanProperty();
-         return tinhtrangblockBooleanProperty;
+        if(tinhtrangblockBooleanProperty == null) {
+           tinhtrangblockBooleanProperty = new SimpleBooleanProperty(this.isTinhTrangBlock());
+        }
+        return tinhtrangblockBooleanProperty;
      }
      
     public User() {

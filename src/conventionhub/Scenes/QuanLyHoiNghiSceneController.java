@@ -320,9 +320,6 @@ public class QuanLyHoiNghiSceneController implements Initializable {
         clmTTXoa.setCellValueFactory((p) -> {
             Hoinghi hn = (Hoinghi)p.getValue();
             BooleanProperty bp = hn.tinhtrangxoaProperty();
-            TinhtrangxoaHoinghi tt = TinhTrangXoaHoinghiBus.getTinhtrangxoa_forHoinghi(hn.getMaHn());
-            boolean ttxoa = tt == null ? false : tt.isTinhtrangxoa();
-            bp.set(ttxoa);
             return bp;
         });
         clmTTXoa.setReorderable(false);

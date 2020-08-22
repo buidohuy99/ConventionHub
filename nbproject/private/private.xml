@@ -4,17 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/Projects/java/ConventionHub/src/conventionhub/Scenes/ThongKeHoiNghiSceneController.java</file>
-            <file>file:/D:/Projects/java/ConventionHub/src/conventionhub/DAO/UserDAO.java</file>
             <file>file:/D:/Projects/java/ConventionHub/src/conventionhub/Scenes/ChiTietScene.fxml</file>
             <file>file:/D:/Projects/java/ConventionHub/src/conventionhub/Bus/HoinghiBus.java</file>
             <file>file:/D:/Projects/java/ConventionHub/src/conventionhub/Scenes/MainSceneController.java</file>
             <file>file:/D:/Projects/java/ConventionHub/src/hibernate.cfg.xml</file>
-            <file>file:/D:/Projects/java/ConventionHub/src/conventionhub/Scenes/QuanLyNguoiDungSceneController.java</file>
-            <file>file:/D:/Projects/java/ConventionHub/src/conventionhub/Bus/UserBus.java</file>
             <file>file:/D:/Projects/java/ConventionHub/src/conventionhub/Scenes/ThemHoiNghiSceneController.java</file>
-            <file>file:/D:/Projects/java/ConventionHub/src/conventionhub/Main.java</file>
             <file>file:/D:/Projects/java/ConventionHub/src/conventionhub/Scenes/QuanLyHoiNghiSceneController.java</file>
-            <file>file:/D:/Projects/java/ConventionHub/src/conventionhub/pojos/Hoinghi.java</file>
         </group>
     </open-files>
 </project-private>

@@ -327,7 +327,7 @@ public class ThongKeHoiNghiSceneController implements Initializable {
     }
 
     public void setDKHoiNghi(){
-        ConventionTable.setItems(null);
+        ConventionTable.getItems().clear();
         if(UserBus.getCurrentUser() == null) return;
         User current = UserBus.getCurrentUser();
         

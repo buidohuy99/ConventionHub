@@ -2,6 +2,7 @@ package conventionhub.pojos;
 // Generated Jul 30, 2020, 1:16:07 PM by Hibernate Tools 4.3.1
 
 
+import conventionhub.Bus.TinhTrangXoaHoinghiBus;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,8 +30,13 @@ public class Hoinghi  implements java.io.Serializable {
 
      private BooleanProperty tinhtrangxoaBooleanProperty;
      public BooleanProperty tinhtrangxoaProperty(){
-         if(tinhtrangxoaBooleanProperty == null) tinhtrangxoaBooleanProperty = new SimpleBooleanProperty();
-         return tinhtrangxoaBooleanProperty;
+        if(tinhtrangxoaBooleanProperty == null) 
+        {
+           TinhtrangxoaHoinghi tt = TinhTrangXoaHoinghiBus.getTinhtrangxoa_forHoinghi(this.getMaHn());
+           boolean ttxoa = tt == null ? false : tt.isTinhtrangxoa();
+           tinhtrangxoaBooleanProperty = new SimpleBooleanProperty(ttxoa);
+        }
+        return tinhtrangxoaBooleanProperty;
      }
      
     public Hoinghi() {

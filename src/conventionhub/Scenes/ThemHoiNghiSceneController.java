@@ -319,9 +319,6 @@ public class ThemHoiNghiSceneController implements Initializable {
         clmTTXoa.setCellValueFactory((p) -> {
             Diadiem dd = (Diadiem)p.getValue();
             BooleanProperty bp = dd.tinhtrangxoaProperty();
-            TinhtrangxoaDiadiem tt = TinhtrangxoaDiadiemBus.getTinhtrangxoa_forDiadiem(dd.getMaDiaDiem());
-            boolean ttxoa = tt == null ? false : tt.isTinhtrangxoa();
-            bp.set(ttxoa);
             return bp;
         });
         clmTTXoa.setReorderable(false);
