@@ -233,6 +233,7 @@ public class DuyetDanhSachThamDuSceneController implements Initializable {
                 usableDangky = FXCollections.observableList(list);
                 
                 AttendanceTable.setItems(usableDangky);
+                AttendanceTable.refresh();
                 
                 loadingOverlay.setVisible(false);
                 Attendance_BorderPane.setDisable(false);

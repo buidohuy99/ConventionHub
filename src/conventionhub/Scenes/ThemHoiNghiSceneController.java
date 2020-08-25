@@ -913,6 +913,7 @@ public class ThemHoiNghiSceneController implements Initializable {
     
     private void setDiadiems(ObservableList<Diadiem> list){
         DiaDiem_TableView.setItems(list);
+        DiaDiem_TableView.refresh();
     }
     
     private void createPage(int page){

@@ -246,6 +246,7 @@ public class QuanLyNguoiDungSceneController implements Initializable {
     
     private void setUsers(ObservableList<User> list){
         UsersTable.setItems(list);
+        UsersTable.refresh();
     }
     
     private void createPage(int page){

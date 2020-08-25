@@ -38,7 +38,6 @@ import utils.HibernateUtils;
 import utils.ThreadPool;
 
 public class ConventionList_ViewController implements Initializable {
-    private ObservableList<Hoinghi> conventionData;
     private MainSceneController innerController;
     
     FXMLLoader loader;
@@ -212,8 +211,8 @@ public class ConventionList_ViewController implements Initializable {
     }    
 
     public void setConventionsData(ObservableList<Hoinghi> data){
-        conventionData = data;
         ConventionTable.setItems(data);
+        ConventionTable.refresh();
     }
     
     public void setInnerController(MainSceneController controller){

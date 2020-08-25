@@ -35,8 +35,6 @@ public class DanhSachThamDuSceneController implements Initializable {
     @FXML
     private TableColumn<User, String> clmEmailUser;
     
-    ObservableList<User> dangkyhoinghi;
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         DanhSachThamDu.addEventFilter(ScrollEvent.ANY, Event::consume);
@@ -91,8 +89,8 @@ public class DanhSachThamDuSceneController implements Initializable {
     }  
     
     public void setDangkyhoinghi(List<User> usersDangky){
-       dangkyhoinghi = FXCollections.observableList(usersDangky);
-       DanhSachThamDu.setItems(dangkyhoinghi);
+       DanhSachThamDu.setItems(FXCollections.observableList(usersDangky));
+       DanhSachThamDu.refresh();
     }
     
 }

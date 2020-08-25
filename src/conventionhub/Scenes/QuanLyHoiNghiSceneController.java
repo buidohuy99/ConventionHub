@@ -425,6 +425,7 @@ public class QuanLyHoiNghiSceneController implements Initializable {
     
     private void setHoiNghis(ObservableList<Hoinghi> list){
         ConventionsTable.setItems(list);
+        ConventionsTable.refresh();
     }
     
     @FXML

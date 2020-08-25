@@ -343,6 +343,7 @@ public class ThongKeHoiNghiSceneController implements Initializable {
             usableHoinghi = FXCollections.observableList(list);
             
             ConventionTable.setItems(usableHoinghi);
+            ConventionTable.refresh();
             
             loadingOverlay.setVisible(false);
             Conventions_BorderPane.setDisable(false);
