@@ -107,13 +107,17 @@ public class MainSceneController implements Initializable{
     private ChangeListener<Toggle> ToggleConventionDisplayType = new ChangeListener<Toggle>() {
         @Override
         public void changed(ObservableValue<? extends Toggle> ov, Toggle t, Toggle t1) {
-            if(display_type.getSelectedToggle() != null ){
+            if(display_type.getSelectedToggle() != null && t!=t1){
+                loaded_pages_hoinghi.clear();
                 createPage(ConventionDisplay_Pagination.getCurrentPageIndex());   
             }
         }  
     };
     
     private void createPage(int page){
+        Conventions_BorderPane.disableProperty().set(true);
+        loadingOverlay.setVisible(true);
+        
         //Create UI if not available
         if(ListDisplay_Button.isSelected()){
             if(ConventionTable_View == null){
@@ -141,13 +145,11 @@ public class MainSceneController implements Initializable{
                     return;
                 }
                 conventionCardsListController = loader.getController();
+                conventionCardsListController.setInnerController(this);
             }
         }
         
-        Conventions_BorderPane.disableProperty().set(true);
-        loadingOverlay.setVisible(true);
-        
-        int maxpagesize = 5;
+        int maxpagesize = ListDisplay_Button.isSelected() ? 5 : 6;
         
         //Load page numbers
         Task<Integer> getPageNumbers = new Task<Integer>() {
@@ -208,7 +210,7 @@ public class MainSceneController implements Initializable{
         loadingOverlay.setVisible(false);
         
         String gioithieu = "Tên ứng dụng: ConventionHub%n"
-                + "Phiên bản: 1.0%n"
+                + "Phiên bản: 1.1%n"
                 + "Các chức năng hỗ trợ tiêu biểu:%n"
                 + "     - Hiển thị thông tin hội nghị và tham gia hội nghị%n"
                 + "     - Hệ thống tài khoản và lưu lại lịch sử đăng ký hội nghị%n"
@@ -527,7 +529,10 @@ public class MainSceneController implements Initializable{
             else
                 createPage(0);
         } else {
-            ListDisplay_Button.selectedProperty().set(true);
+            if(ConventionDisplay_Pagination.getCurrentPageIndex() != 0)
+                ConventionDisplay_Pagination.currentPageIndexProperty().set(0);
+            else
+                createPage(0);
         }
     }
     

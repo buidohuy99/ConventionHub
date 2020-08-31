@@ -40,7 +40,7 @@ import utils.ThreadPool;
 public class ConventionList_ViewController implements Initializable {
     private MainSceneController innerController;
     
-    FXMLLoader loader;
+    private FXMLLoader loader;
     
     @FXML
     private TableView<Hoinghi> ConventionTable;

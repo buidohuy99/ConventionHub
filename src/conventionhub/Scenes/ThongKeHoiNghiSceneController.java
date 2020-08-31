@@ -13,6 +13,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -88,6 +90,38 @@ public class ThongKeHoiNghiSceneController implements Initializable {
         SearchCriteriasList = FXCollections.observableArrayList("Theo mã hội nghị","Theo tên hội nghị");
         
         SearchKeywordType_ComboBox.setItems(SearchCriteriasList);
+        ChangeListener<String> byMaHn = new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                if (!t1.matches("\\d*")) {
+                    t1 = t1.replaceAll("[^\\d]", "");
+                }
+                SearchBar.setText(t1.substring(0, Math.min(t1.length(), 10)));
+            }
+        };
+        ChangeListener<String> byTenHn = new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                SearchBar.setText(t1.substring(0, Math.min(t1.length(), 70)));
+            }
+        };
+        SearchKeywordType_ComboBox.getSelectionModel().selectedIndexProperty().addListener((ov, t, t1) -> {
+            SearchBar.clear();
+            if(t != null){
+                switch((Integer)t){
+                    case 0:
+                        SearchBar.textProperty().removeListener(byMaHn); break;
+                    case 1:
+                        SearchBar.textProperty().removeListener(byTenHn); break;
+                }
+            }
+            switch((Integer)t1){
+                case 0:
+                    SearchBar.textProperty().addListener(byMaHn); break;
+                case 1:
+                    SearchBar.textProperty().addListener(byTenHn); break;
+            };
+        });
         SearchKeywordType_ComboBox.getSelectionModel().select(0); 
         
         ConventionTable.addEventFilter(ScrollEvent.ANY, Event::consume);
@@ -327,7 +361,6 @@ public class ThongKeHoiNghiSceneController implements Initializable {
     }
 
     public void setDKHoiNghi(){
-        ConventionTable.getItems().clear();
         if(UserBus.getCurrentUser() == null) return;
         User current = UserBus.getCurrentUser();
         
@@ -340,8 +373,8 @@ public class ThongKeHoiNghiSceneController implements Initializable {
         
         getDangKyHoiNghi.setOnSucceeded((t) -> {
             List<Hoinghi> list = getDangKyHoiNghi.getValue();
-            usableHoinghi = FXCollections.observableList(list);
             
+            usableHoinghi = FXCollections.observableList(list);
             ConventionTable.setItems(usableHoinghi);
             ConventionTable.refresh();
             
@@ -354,9 +387,104 @@ public class ThongKeHoiNghiSceneController implements Initializable {
         ThreadPool.submit(getDangKyHoiNghi);
     }
 
+    private void toggleLoadingMode(boolean isLoading){
+        Conventions_BorderPane.setDisable(isLoading);
+        loadingOverlay.setVisible(isLoading);
+    }
+    
     @FXML
     private void RefreshButton_Clicked(MouseEvent event) {
         setDKHoiNghi();
+    }
+
+    @FXML
+    private void SearchButton_Clicked(MouseEvent event) {
+        if(UserBus.getCurrentUser() == null) return;
+        User current = UserBus.getCurrentUser();
+        String searchStr = SearchBar.getText();
+        if(searchStr == null || searchStr.length() == 0){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Không thể tìm với keyword trống");
+            alert.setContentText("Vui lòng cung cấp keyword có độ dài > 1");
+            alert.show();
+            return;
+        }
+        toggleLoadingMode(true);
+        switch(SearchKeywordType_ComboBox.getSelectionModel().getSelectedIndex()){
+            case 0:
+                Integer value = Integer.valueOf(searchStr);
+                Task<List<Hoinghi>> getByID = new Task<List<Hoinghi>>() {
+                    @Override
+                    protected List<Hoinghi> call() throws Exception {
+                        return DangkyhoinghiBus.getAll_Hoinghi_OfUser_WithParameter(current.getIduser(), DangkyhoinghiBus.SEARCH_HN_TYPE_OFUSER.BY_ID, value);
+                    }
+                };
+                getByID.setOnSucceeded(t->{
+                    List<Hoinghi> list = getByID.getValue();
+                    if(list == null || list.size() == 0){
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setHeaderText("Không thể tìm thấy");
+                        alert.setContentText("Không thể tìm thấy dữ liệu phù hợp keyword");
+                        alert.show();
+                    }
+                    usableHoinghi = FXCollections.observableList(list);
+                    ConventionTable.setItems(usableHoinghi);
+                    ConventionTable.refresh();
+                    
+                    toggleLoadingMode(false);
+                });
+                getByID.setOnFailed(t->{
+                    Exception exc = (Exception) getByID.getException();
+                    if(exc instanceof DangkyhoinghiBus.DangkyhoinghiBusException){
+                        DangkyhoinghiBus.DangkyhoinghiBusException ht = (DangkyhoinghiBus.DangkyhoinghiBusException) exc;
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText(ht.getMessage());
+                        alert.setContentText(ht.getExplanationString());  
+                        alert.show();
+                    }else{
+                        exc.printStackTrace(System.err);
+                    }
+                    toggleLoadingMode(false);
+                });
+                ThreadPool.submit(getByID);
+                break;
+            case 1:
+                Task<List<Hoinghi>> getByName = new Task<List<Hoinghi>>() {
+                    @Override
+                    protected List<Hoinghi> call() throws Exception {
+                        return DangkyhoinghiBus.getAll_Hoinghi_OfUser_WithParameter(current.getIduser(), DangkyhoinghiBus.SEARCH_HN_TYPE_OFUSER.BY_NAME, searchStr);
+                    }
+                };
+                getByName.setOnSucceeded(t->{
+                    List<Hoinghi> list = getByName.getValue();
+                    if(list == null || list.size() == 0){
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setHeaderText("Không thể tìm thấy");
+                        alert.setContentText("Không thể tìm thấy dữ liệu phù hợp keyword");
+                        alert.show();
+                    }
+                    usableHoinghi = FXCollections.observableList(list);
+                    ConventionTable.setItems(usableHoinghi);
+                    ConventionTable.refresh();
+                    
+                    toggleLoadingMode(false);
+                });
+                getByName.setOnFailed((t) -> {
+                    Exception exc = (Exception) getByName.getException();
+                    if(exc instanceof DangkyhoinghiBus.DangkyhoinghiBusException){
+                        DangkyhoinghiBus.DangkyhoinghiBusException ht = (DangkyhoinghiBus.DangkyhoinghiBusException) exc;
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText(ht.getMessage());
+                        alert.setContentText(ht.getExplanationString());  
+                        alert.show();
+                    }else{
+                        exc.printStackTrace(System.err);
+                    }
+                    toggleLoadingMode(false);
+                });
+                ThreadPool.submit(getByName);
+                break;
+        }
     }
     
 }

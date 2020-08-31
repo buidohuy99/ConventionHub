@@ -1,5 +1,6 @@
 package conventionhub.views;
 
+import conventionhub.Scenes.MainSceneController;
 import conventionhub.pojos.Hoinghi;
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +21,8 @@ import javafx.scene.layout.VBox;
 
 public class ConventionCards_ViewController implements Initializable {
 
+    private MainSceneController innerController;
+    
     @FXML
     private GridPane Cards_GridPane;
     
@@ -48,15 +51,16 @@ public class ConventionCards_ViewController implements Initializable {
     
     public void setConventionsData(ObservableList<Hoinghi> hn){
         if(hn == null) return;
+        innerController.toggleLoadingConventionsBorderPane(true);
         int size = hn.size();
         Cards_GridPane.getChildren().clear();
         Cards_GridPane.getRowConstraints().clear();
+        Stack<ConventionCard> temp_stack = new Stack<>();
         for(int i = 0; i < size; i++){
             if(i%maxPerRow == 0){
                 RowConstraints temp = new RowConstraints();
                 temp.vgrowProperty().set(Priority.ALWAYS);
-                temp.valignmentProperty().set(VPos.TOP);
-                temp.minHeightProperty().set(0);
+                temp.valignmentProperty().set(VPos.CENTER);
                 Cards_GridPane.getRowConstraints().add(temp);
             }
             ConventionCard spareCard;
@@ -72,12 +76,19 @@ public class ConventionCards_ViewController implements Initializable {
                     return;
                 }
                 spareCard.controller = loader.getController();
+                spareCard.controller.setInnerController(innerController);
             }else{
                 spareCard = ConventionCards.pop();
             }
+            temp_stack.push(spareCard);
             spareCard.controller.setHoinghi(hn.get(i));
             Cards_GridPane.add(spareCard.view, (int)(i%maxPerRow), (int)(i/maxPerRow));
         }
+        ConventionCards.addAll(temp_stack);
+        innerController.toggleLoadingConventionsBorderPane(false);
     }
     
+    public void setInnerController(MainSceneController controller){
+        innerController = controller;
+    }
 }

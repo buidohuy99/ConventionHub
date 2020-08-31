@@ -7,10 +7,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conventionhub.views.ConventionCards_ViewController">
+<AnchorPane id="AnchorPane" prefWidth="784.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conventionhub.views.ConventionCards_ViewController">
     <children>
-        <GridPane fx:id="Cards_GridPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            
+        <GridPane fx:id="Cards_GridPane" vgap="10" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">    
         </GridPane>
     </children>
 </AnchorPane>

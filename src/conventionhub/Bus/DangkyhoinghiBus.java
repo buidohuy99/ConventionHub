@@ -15,6 +15,11 @@ import utils.HibernateUtils;
 public class DangkyhoinghiBus {
     private static Stage stage;
     
+    public static enum SEARCH_HN_TYPE_OFUSER{
+        BY_ID,
+        BY_NAME,
+    }
+    
     public static Stage getDuyetDKStage(){
         if(stage == null) stage = new Stage();
         return stage;
@@ -56,6 +61,30 @@ public class DangkyhoinghiBus {
         
         session.beginTransaction();
         List<Hoinghi> results = DangkyhoinghiDAO.fetchAll_Hoinghi_OfUser(session, iduser);
+        session.getTransaction().commit();
+        
+        session.close();
+        return results;
+    }
+    
+    public static List<Hoinghi> getAll_Hoinghi_OfUser_WithParameter(Integer iduser, SEARCH_HN_TYPE_OFUSER type, Object parameter) throws DangkyhoinghiBusException{
+        if(iduser == null || type == null) return null;
+        
+        SessionFactory factory = HibernateUtils.getSessionFactory();
+        Session session = factory.openSession();
+        
+        session.beginTransaction();
+        List<Hoinghi> results;
+        switch(type){
+            case BY_ID:
+                if(!(parameter instanceof Integer)) throw new DangkyhoinghiBusException("Lỗi từ khóa tìm kiếm", "Từ khóa không phải là một số mã");
+                results = DangkyhoinghiDAO.fetchAll_Hoinghi_OfUser_ByType_WithTypeParameter(session, iduser, DangkyhoinghiDAO.SEARCH_TYPE.BY_MAHN, parameter);
+                break;
+            case BY_NAME: default:
+                if(!(parameter instanceof String)) throw new DangkyhoinghiBusException("Lỗi từ khóa tìm kiếm", "Từ khóa không phải là một chuỗi ký tự");
+                results = DangkyhoinghiDAO.fetchAll_Hoinghi_OfUser_ByType_WithTypeParameter(session, iduser, DangkyhoinghiDAO.SEARCH_TYPE.BY_NAME, parameter);
+                break;
+        }
         session.getTransaction().commit();
         
         session.close();

@@ -89,7 +89,7 @@
                                                 <ToggleGroup fx:id="display_type" />
                                              </toggleGroup>
                                           </RadioButton>
-                                          <RadioButton fx:id="CardsDisplay_Button" mnemonicParsing="false" text="Cards" toggleGroup="$display_type" visible="false" />
+                                          <RadioButton fx:id="CardsDisplay_Button" mnemonicParsing="false" text="Dạng cards" toggleGroup="$display_type" visible="true" />
                                        </children>
                                        <padding>
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -114,12 +114,12 @@
                            <center>
                                 <StackPane prefHeight="150.0" prefWidth="200.0">
                                    <children>
-                                      <ScrollPane>
+                                      <ScrollPane style="-fx-background-color: transparent;">
                                          <content>
                                            <StackPane fx:id="ConventionDisplayPane" />
                                          </content>
                                       </ScrollPane>
-                                      <VBox fx:id="loadingOverlay" alignment="CENTER" disable="true" prefHeight="200.0" prefWidth="100.0">
+                                      <VBox fx:id="loadingOverlay" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                          <children>
                                             <ProgressIndicator />
                                          </children>
