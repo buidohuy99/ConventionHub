@@ -1,6 +1,5 @@
 package conventionhub.DAO;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import conventionhub.pojos.Diadiem;
 import java.util.Date;
 import java.util.List;

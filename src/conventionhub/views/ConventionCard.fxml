@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<StackPane minWidth="250" maxWidth="250" prefWidth="250" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conventionhub.views.ConventionCardController">
+<StackPane maxWidth="250" minWidth="250" prefWidth="250" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="conventionhub.views.ConventionCardController">
    <children>
-       <ScrollPane fx:id="CardScrollPane" fitToWidth="true" prefHeight="350" style="-fx-background-color: #ffffff; -fx-border-color: black; -fx-border-width: 1;">
+       <ScrollPane fx:id="CardScrollPane" fitToWidth="true" prefHeight="300" style="-fx-background-color: #ffffff; -fx-border-color: black; -fx-border-width: 1;">
           <content>
-            <GridPane vgap="10" alignment="CENTER" style="-fx-background-color: #ffffff;">
+            <GridPane alignment="CENTER" style="-fx-background-color: #ffffff;" vgap="10">
                 <columnConstraints>
                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="30" />
                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="70" />
@@ -31,15 +36,20 @@
                     </image></ImageView>
                     <Label fx:id="MaHoiNghi" style="-fx-font-weight: bold;" text="ID" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
                      </Label>
-                     <Label fx:id="TenHoiNghi" style="-fx-font-weight: bold;" text="name_convention" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                     <Label fx:id="TenHoiNghi" style="-fx-font-weight: bold;" text="name_convention" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0">
                      </Label>
                      <Label style="-fx-font-weight: bold;" text="Thời gian tổ chức" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="2">
                      </Label>
                      <Label style="-fx-font-weight: bold;" text="Mô tả ngắn gọn" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="3">
                      </Label>
-                     <Label fx:id="ThoiGianHoiNghi" text="time_frame" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                     <Label fx:id="MoTaNganGon" text="mota_ngango" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                     <Button mnemonicParsing="false" onMouseClicked="#SeeDetailsButton_OnClicked" text="Xem chi tiết" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                     <Label fx:id="ThoiGianHoiNghi" text="time_frame" textAlignment="JUSTIFY" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                     <Label fx:id="MoTaNganGon" text="mota_ngango" textAlignment="JUSTIFY" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="150.0" spacing="20.0" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                     <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#ToTopButton_Clicked" text="Về đầu card" />
+                           <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#SeeDetailsButton_OnClicked" text="Xem chi tiết" />
+                     </children>
+                  </HBox>
                  </children>   
             </GridPane>
           </content>

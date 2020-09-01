@@ -141,5 +141,10 @@ public class ConventionCardController implements Initializable {
         });
         ThreadPool.submit(getTTXoa);
     }
+
+    @FXML
+    private void ToTopButton_Clicked(MouseEvent event) {
+        CardScrollPane.setVvalue(0);
+    }
     
 }

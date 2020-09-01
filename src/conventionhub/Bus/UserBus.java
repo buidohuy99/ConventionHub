@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.hibernate.HibernateException;
@@ -110,7 +111,9 @@ public class UserBus {
     }
     
     public static Stage getLogInSignUpStage(){
-        if(LogInSignUpStage == null) LogInSignUpStage = new Stage();
+        if(LogInSignUpStage == null) {
+            LogInSignUpStage = new Stage();
+        }
         return LogInSignUpStage;
     }
     

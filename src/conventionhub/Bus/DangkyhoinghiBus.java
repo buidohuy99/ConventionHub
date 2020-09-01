@@ -7,6 +7,7 @@ import conventionhub.pojos.Hoinghi;
 import conventionhub.pojos.User;
 import java.util.Date;
 import java.util.List;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -21,7 +22,9 @@ public class DangkyhoinghiBus {
     }
     
     public static Stage getDuyetDKStage(){
-        if(stage == null) stage = new Stage();
+        if(stage == null) {
+            stage = new Stage();
+        }
         return stage;
     }
     
