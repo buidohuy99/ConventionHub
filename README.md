@@ -14,9 +14,9 @@
      2. Nếu máy là macOS, .... (cập nhật sau)
      3. Nếu máy không nằm trong 2 loại trên hoặc có nhưng chưa có hướng dẫn ở trên. Mở terminal/shell/cmd/... của máy lên và chạy dòng lệnh sau:
      > java --add-opens java.base/java.lang=javassist -Djava.library.path="**{native-lib-folder}**" --module-path "**{current-folder}**/lib" --add-modules javafx.controls,javafx.fxml -jar **{current-folder}**/ConventionHub.jar
-     Thay các tham số (được in đậm, thay cả dấu ngoặc {})
-     - **{current-folder}** : bằng **đường dẫn (1) ở bên trên** đã nhắc tới
-     - **{native-lib-folder}** : bằng đường dẫn đến folder lưu các thư viện native của từng nền tảng (windows, mac,...). **Lưu ý**: **các folder lưu các thư viện native của các nền tảng** được cung cấp sẵn bên trong folder con lib của **đường dẫn (1) bên trên**, và **có tên là native-windows, native-mac,...**. Nếu **không tìm thấy** thư viện native được cung cấp sẵn như đã nói, của nền tảng hiện tại muốn chạy ứng dụng trên, có thể lên mạng tìm kiếm các thư viện native của **của các thư viện có trong folder librariesForProject của project** tải về.
+     - Thay các tham số (được in đậm, thay cả dấu ngoặc {})
+       - **{current-folder}** : bằng **đường dẫn (1) ở bên trên** đã nhắc tới
+       - **{native-lib-folder}** : bằng đường dẫn đến folder lưu các thư viện native của từng nền tảng (windows, mac,...). **Lưu ý**: **các folder lưu các thư viện native của các nền tảng** được cung cấp sẵn bên trong folder con lib của **đường dẫn (1) bên trên**, và **có tên là native-windows, native-mac,...**. Nếu **không tìm thấy** thư viện native được cung cấp sẵn như đã nói, của nền tảng hiện tại muốn chạy ứng dụng trên, có thể lên mạng tìm kiếm các thư viện native của **của các thư viện có trong folder librariesForProject của project** tải về.
    - Sử dụng chương trình...
   
 -----------------------------------------------------------------
